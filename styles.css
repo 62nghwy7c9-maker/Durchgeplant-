@@ -114,7 +114,9 @@ h1,h2,h3,h4 { color: var(--ink); font-weight: 800; line-height: 1.08; margin: 0;
 /* ---------- Header / Nav ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
+  background: var(--ground); /* Fallback für Browser ohne color-mix */
   background: color-mix(in srgb, var(--ground) 82%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
   backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--line);
 }
