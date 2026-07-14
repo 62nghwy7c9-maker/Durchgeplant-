@@ -281,10 +281,80 @@ form { display: grid; gap: 16px; }
 .footer-bottom p { color: var(--band-muted); font-size: 13px; margin: 0; }
 .footer-bottom .legal { display: flex; gap: 20px; }
 
-/* ---------- Reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+/* ---------- Reveal animation (mit Stagger) ----------
+   Progressive Enhancement: ohne JS ist alles sichtbar (opacity:1).
+   Nur mit <html class="js"> wird versteckt und beim Sichtbarwerden eingeblendet.
+   Der Endzustand ist in .in DEKLARIERT (nicht nur animiert), damit Inhalt
+   niemals hängen bleibt; die Transition sorgt nur für den weichen Effekt. */
+.reveal { opacity: 1; transform: none; }
+.js .reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s var(--ease) var(--stagger, 0ms), transform .7s var(--ease) var(--stagger, 0ms);
+}
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Scroll-Fortschrittsbalken ---------- */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100;
+  background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; will-change: transform;
+}
+
+/* ---------- Header-Zustand beim Scrollen ---------- */
+.site-header { transition: box-shadow .3s var(--ease), background .3s var(--ease); }
+.site-header.scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 24px rgba(30,42,58,.07); }
+.site-header.scrolled .nav { height: 60px; transition: height .3s var(--ease); }
+.nav { transition: height .3s var(--ease); }
+
+/* ---------- Parallax-Raster im Hero ---------- */
+.hero-grid-bg { will-change: transform; }
+
+/* ---------- Scroll-Indikator ("Scrollen") ---------- */
+.scroll-cue {
+  position: absolute; left: 24px; bottom: 30px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); transition: opacity .4s var(--ease), color .2s var(--ease);
+}
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue .cue-track { position: relative; width: 46px; height: 1px; background: var(--line); overflow: hidden; display: inline-block; }
+.scroll-cue .cue-track::after {
+  content: ""; position: absolute; top: 0; left: 0; height: 1px; width: 16px; background: var(--accent);
+  animation: cueSlide 1.9s var(--ease) infinite;
+}
+@keyframes cueSlide { 0% { transform: translateX(-16px); } 60%,100% { transform: translateX(46px); } }
+@media (prefers-reduced-motion: reduce) { .scroll-cue .cue-track::after { animation: none; } }
+@media (max-width: 680px) { .scroll-cue { display: none; } }
+
+/* ---------- Pfeil-CTAs (Slide-Effekt) ---------- */
+.btn--arrow::after {
+  content: "→"; display: inline-block; margin-left: 2px; transition: transform .25s var(--ease); font-weight: 600;
+}
+.btn--arrow:hover::after { transform: translateX(5px); }
+
+/* ---------- Interaktive Projektkarten ---------- */
+.tile { cursor: pointer; transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.tile::after { transition: opacity .4s var(--ease), transform .5s var(--ease); }
+.tile:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: var(--shadow); }
+.tile:hover::after { opacity: .85; transform: scale(1.12); }
+.tile:hover .tile-arrow { opacity: 1; transform: translate(0,0); }
+.tile-arrow {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff; font-weight: 700;
+  opacity: 0; transform: translate(-6px,6px); transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+
+/* ---------- Card & Quote Hover-Lift ---------- */
+.quote { transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease); }
+.quote:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+
+/* ---------- Timeline-Schritt Hover ---------- */
+.step { transition: background .2s var(--ease); }
+.step .idx { transition: transform .25s var(--ease); display: inline-block; }
+.step:hover .idx { transform: translateX(4px); }
 
 /* ---------- Legal pages ---------- */
 .legal-page { padding: 72px 0 96px; }
