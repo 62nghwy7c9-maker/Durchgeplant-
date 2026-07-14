@@ -1,0 +1,368 @@
+<title>Design-Konzept · durchgeplant</title>
+<style>
+  :root {
+    --ground: #F7F4EF;
+    --surface: #FFFFFF;
+    --ink: #1E2A3A;
+    --text: #383D45;
+    --muted: #857F74;
+    --accent: #C4703A;
+    --accent-soft: #EBD9CB;
+    --line: #E2DBD1;
+    --band: #1E2A3A;
+    --band-text: #E8E2D7;
+    --band-muted: #9AA3B0;
+    --good: #3E6B54;
+    --radius: 4px;
+    --maxw: 1080px;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #12161C;
+      --surface: #1A202A;
+      --ink: #F2ECE1;
+      --text: #C7CCD4;
+      --muted: #8B8F98;
+      --accent: #E08A52;
+      --accent-soft: #3A2A20;
+      --line: #2A323E;
+      --band: #0C0F14;
+      --band-text: #EDE7DC;
+      --band-muted: #8A93A0;
+      --good: #6FA986;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F7F4EF; --surface: #FFFFFF; --ink: #1E2A3A; --text: #383D45;
+    --muted: #857F74; --accent: #C4703A; --accent-soft: #EBD9CB; --line: #E2DBD1;
+    --band: #1E2A3A; --band-text: #E8E2D7; --band-muted: #9AA3B0; --good: #3E6B54;
+  }
+  :root[data-theme="dark"] {
+    --ground: #12161C; --surface: #1A202A; --ink: #F2ECE1; --text: #C7CCD4;
+    --muted: #8B8F98; --accent: #E08A52; --accent-soft: #3A2A20; --line: #2A323E;
+    --band: #0C0F14; --band-text: #EDE7DC; --band-muted: #8A93A0; --good: #6FA986;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---- technical label ---- */
+  .label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .label .num { color: var(--accent); }
+
+  h1, h2, h3 { color: var(--ink); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+
+  /* ---- top bar ---- */
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--surface);
+  }
+  .brandmark { font-family: var(--mono); font-weight: 600; letter-spacing: 0.02em; color: var(--ink); font-size: 15px; }
+  .brandmark b { color: var(--accent); }
+
+  /* ---- hero ---- */
+  .hero { padding: 74px 0 64px; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow { margin-bottom: 26px; }
+  .hero h1 {
+    font-size: clamp(44px, 8vw, 92px);
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  .hero h1 .dot { color: var(--accent); }
+  .hero .slogan {
+    font-size: clamp(19px, 2.6vw, 26px);
+    color: var(--ink);
+    margin-top: 22px;
+    font-weight: 500;
+    max-width: 20ch;
+  }
+  .hero .lede {
+    margin-top: 20px; max-width: 54ch; font-size: 17px; color: var(--text);
+  }
+  .meta-grid {
+    margin-top: 46px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-top: 1px solid var(--line);
+  }
+  .meta-grid div {
+    padding: 16px 18px 16px 0;
+    border-right: 1px solid var(--line);
+  }
+  .meta-grid div:last-child { border-right: none; }
+  .meta-grid dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .meta-grid dd { margin: 6px 0 0; color: var(--ink); font-weight: 600; font-size: 15px; }
+
+  /* ---- section scaffold ---- */
+  section { padding: 66px 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: flex; gap: 16px; align-items: baseline; margin-bottom: 34px; flex-wrap: wrap; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; }
+  .sec-head .kicker { flex: 0 0 auto; }
+
+  p.body { max-width: 62ch; }
+  .pull { color: var(--ink); font-weight: 500; }
+
+  /* ---- cards (Leistungen) ---- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .card { background: var(--surface); padding: 30px 26px; }
+  .card .n { font-family: var(--mono); color: var(--accent); font-size: 13px; letter-spacing: 0.1em; }
+  .card h3 { font-size: 22px; margin: 14px 0 10px; }
+  .card p { margin: 0; font-size: 14.5px; color: var(--text); }
+
+  /* ---- stat band ---- */
+  .band { background: var(--band); color: var(--band-text); border: none; }
+  .band .label { color: var(--band-muted); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 28px; margin-top: 30px; }
+  .stat .val {
+    font-size: clamp(46px, 7vw, 72px); font-weight: 800; letter-spacing: -0.03em;
+    color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .stat .cap { margin-top: 12px; color: var(--band-muted); font-size: 14px; max-width: 22ch; }
+
+  /* ---- process timeline ---- */
+  .steps { display: grid; gap: 0; }
+  .step {
+    display: grid; grid-template-columns: 60px 1fr; gap: 20px;
+    padding: 16px 0; border-top: 1px solid var(--line); align-items: baseline;
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+  .step .idx { font-family: var(--mono); color: var(--accent); font-size: 14px; letter-spacing: 0.08em; }
+  .step .txt { color: var(--ink); font-weight: 500; font-size: 16px; }
+  .step .txt small { display: block; color: var(--muted); font-weight: 400; font-size: 13.5px; margin-top: 2px; }
+
+  /* ---- quotes ---- */
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+  .quote { border-left: 2px solid var(--accent); padding: 4px 0 4px 20px; }
+  .quote p { margin: 0; color: var(--ink); font-size: 16px; font-style: italic; }
+  .quote cite { display: block; margin-top: 12px; font-family: var(--mono); font-size: 12px; color: var(--muted); font-style: normal; letter-spacing: 0.08em; }
+
+  /* ---- palette ---- */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 8px; }
+  .sw { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+  .sw .chip { height: 78px; }
+  .sw .info { padding: 12px 14px; }
+  .sw .role { font-size: 13.5px; color: var(--ink); font-weight: 600; }
+  .sw .hex { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 3px; text-transform: uppercase; }
+
+  /* ---- type specimen ---- */
+  .specimen { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 30px 28px; margin-top: 10px; }
+  .specimen .big { font-size: clamp(34px, 6vw, 56px); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); line-height: 1.05; }
+  .specimen .row { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; display: flex; gap: 24px; flex-wrap: wrap; align-items: baseline; }
+  .specimen .role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); flex: 0 0 120px; }
+  .specimen .demo { color: var(--text); flex: 1; min-width: 220px; }
+
+  /* ---- two-col generic ---- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .cols ul { margin: 0; padding-left: 0; list-style: none; }
+  .cols li { padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .cols li:first-child { border-top: none; }
+  .cols li b { color: var(--ink); }
+  .sitemap li .lvl2 { display: block; color: var(--muted); font-size: 13.5px; padding-left: 14px; margin-top: 4px; }
+
+  .tag { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--accent); border-radius: 40px; padding: 3px 12px; margin: 0 6px 8px 0; }
+
+  /* ---- footer ---- */
+  footer { background: var(--band); color: var(--band-text); padding: 54px 0 60px; }
+  footer .label { color: var(--band-muted); }
+  footer h2 { color: var(--band-text); font-size: 28px; margin-top: 16px; }
+  .contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 30px; }
+  .contact dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--band-muted); }
+  .contact dd { margin: 6px 0 0; color: var(--band-text); font-size: 15px; }
+  .contact a { color: var(--accent); text-decoration: none; }
+  .foot-note { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 12.5px; color: var(--band-muted); max-width: 70ch; }
+
+  @media (max-width: 640px) {
+    .cols { grid-template-columns: 1fr; gap: 22px; }
+    .meta-grid div { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+</style>
+
+<div class="topbar wrap-full">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 28px;">
+    <span class="brandmark">durch<b>geplant</b></span>
+    <span class="label">Design-Konzept · v1</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow label"><span class="num">00</span> &nbsp;/&nbsp; Briefing &amp; Design-Konzept · MOEWES – Projektierung und Vertrieb</div>
+    <h1>durchgeplant<span class="dot">.</span></h1>
+    <p class="slogan">„Guter Rat ist selten teuer."</p>
+    <p class="lede">Unabhängige Bauberatung und Hausanbieter-Vergleich in NRW – die Lücke zwischen Katalog-Fertighaus und teurem Architektenhaus. Ein erfahrener Lotse, der Erstbauende sicher durch das Bauvorhaben führt.</p>
+
+    <dl class="meta-grid">
+      <div><dt>Inhaber</dt><dd>Henning Moewes</dd></div>
+      <div><dt>Standort</dt><dd>Kerpen, NRW</dd></div>
+      <div><dt>Zielgruppe</dt><dd>Erstbauende</dd></div>
+      <div><dt>Kern-Vibe</dt><dd>Seriös · vertrauensvoll</dd></div>
+    </dl>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker label"><span class="num">01</span> Marke &amp; Vibe</span>
+      <h2>Der ruhige Berater, nicht der Verkäufer</h2>
+    </div>
+    <p class="body pull">Positioniert als erfahrener Lotse für nervöse Erstbauherren – „an die Hand nehmen", Sicherheit und ein gutes Gefühl geben.</p>
+    <p class="body">Tonalität: professionell, aber nahbar. Partnerschaftlich statt verkäuferisch – „ein gemeinsamer Weg", „das gute Gefühl ist wichtig". Beratend, ehrlich, ruhig. Der Markenkern in einem Satz: <b class="pull">sicher bauen ohne Kostenfalle – mit einem unabhängigen Berater an der Seite.</b></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker label"><span class="num">02</span> Angebot</span>
+      <h2>Drei Leistungen</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="n">01</div>
+        <h3>Beratung</h3>
+        <p>Auswahl und Analyse der passenden Hausanbieter – unabhängig und auf den Bauherrn zugeschnitten.</p>
+      </div>
+      <div class="card">
+        <div class="n">02</div>
+        <h3>Planung</h3>
+        <p>Individuelles Hausdesign nach Bedarf, Grundstück und Budget – vom Raumbuch zum Entwurf.</p>
+      </div>
+      <div class="card">
+        <div class="n">03</div>
+        <h3>Kalkulation</h3>
+        <p>Vollständige Kostenaufstellung inklusive aller Nebenkosten – 100 % Kostensicherheit im Werkvertrag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="label"><span class="num" style="color:var(--accent)">03</span> Beweise · Trust-Anker</span>
+    <div class="stats">
+      <div class="stat"><div class="val">17+</div><div class="cap">Jahre Erfahrung am Bau</div></div>
+      <div class="stat"><div class="val">320+</div><div class="cap">begleitete Bauprojekte</div></div>
+      <div class="stat"><div class="val">100%</div><div class="cap">Kostensicherheit im Werkvertrag</div></div>
+      <div class="stat"><div class="val">5</div><div class="cap">geprüfte regionale Baupartner</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker label"><span class="num">04</span> So arbeiten wir</span>
+      <h2>Vom Kennenlernen zur fertigen Planung</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="idx">01</span><span class="txt">Erster Kontakt<small>Telefonisches Kennenlernen, Bedarf klären</small></span></div>
+      <div class="step"><span class="idx">02</span><span class="txt">Bedarfsanalyse<small>Wohnbedürfnisse für die kommenden Lebensphasen</small></span></div>
+      <div class="step"><span class="idx">03</span><span class="txt">Budget-Rahmen abstecken<small>Realistischer Kostenrahmen von Anfang an</small></span></div>
+      <div class="step"><span class="idx">04</span><span class="txt">Individuelle Wohnwünsche<small>Gemeinsames Raumbuch entwickeln</small></span></div>
+      <div class="step"><span class="idx">05</span><span class="txt">Übergabe erster Unterlagen<small>Dokumentation der Anbieter beim ersten Termin</small></span></div>
+      <div class="step"><span class="idx">06</span><span class="txt">Planungsentwurf + Kalkulation<small>Fertig in ca. 10 Tagen, mit Kostenaufstellung</small></span></div>
+      <div class="step"><span class="idx">07</span><span class="txt">Änderungswünsche &amp; Anpassung<small>Feinschliff und kalkulatorische Nachjustierung</small></span></div>
+      <div class="step"><span class="idx">08</span><span class="txt">Finaler Abstimmungstermin<small>Vertragsreife Unterlagen in der Hand</small></span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker label"><span class="num">05</span> Kundenstimmen</span>
+      <h2>Was Bauherren sagen</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote"><p>„Ihre Beratung und die tatsächliche Abwicklung meines Bauvorhabens waren spitze."</p><cite>— G. M.</cite></div>
+      <div class="quote"><p>„Nicht nur viele erhellende Momente, sondern auch ein sicheres Gefühl."</p><cite>— A. W.</cite></div>
+      <div class="quote"><p>„Ihre Kostenaufstellung hat genau gepasst – die Abwicklung einfach spitze."</p><cite>— S. R.</cite></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker label"><span class="num">06</span> Design-Konzept</span>
+      <h2>Vibe behalten, hochwertiger &amp; markanter</h2>
+    </div>
+    <p class="body">Das Ist-Design ist clean, aber blass und kontrastarm – die starke Kompetenz kommt visuell zu leise rüber. Empfehlung: das Vertrauens-Gefühl als Kern bewahren, aber mit mehr Kontrast, einer klaren Markenfarbe und sichtbaren Trust-Elementen aufladen. Premium und entscheidungsstark statt zurückhaltend.</p>
+
+    <div class="label" style="margin:38px 0 6px;">Farbwelt</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F7F4EF"></div><div class="info"><div class="role">Warmweiß · Basis</div><div class="hex">#F7F4EF</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1E2A3A"></div><div class="info"><div class="role">Nachtblau · Anker</div><div class="hex">#1E2A3A</div></div></div>
+      <div class="sw"><div class="chip" style="background:#C4703A"></div><div class="info"><div class="role">Terrakotta · Akzent</div><div class="hex">#C4703A</div></div></div>
+      <div class="sw"><div class="chip" style="background:#3E6B54"></div><div class="info"><div class="role">Waldgrün · Alternative</div><div class="hex">#3E6B54</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E2DBD1"></div><div class="info"><div class="role">Warmgrau · Linien</div><div class="hex">#E2DBD1</div></div></div>
+    </div>
+    <p class="body" style="margin-top:16px;font-size:14.5px;color:var(--muted)">Nur <b class="pull">eine</b> Akzentfarbe konsequent führen. Empfehlung: Terrakotta – warm, erdig-baunah, deutlich markanter als das heutige Grau. Waldgrün als seriös-nachhaltige Alternative.</p>
+
+    <div class="label" style="margin:44px 0 6px;">Typografie</div>
+    <div class="specimen">
+      <div class="big">Sicher bauen<br>ohne Kostenfalle.</div>
+      <div class="row"><span class="role">Headline</span><span class="demo">Kräftige, humanistische Grotesk mit Charakter · große, selbstbewusste Größen · enges Tracking (−0.03em).</span></div>
+      <div class="row"><span class="role">Fließtext</span><span class="demo">Gut lesbare Sans, Zeilenhöhe ~1.6, Zeilenlänge ~65 Zeichen für ruhiges, vertrauensvolles Lesen.</span></div>
+      <div class="row"><span class="role">Label / Daten</span><span class="demo" style="font-family:var(--mono);letter-spacing:0.06em;">Monospace als Maß-Annotation — evoziert die technische Bauzeichnung. 17+ · 320+ · 100%</span></div>
+    </div>
+
+    <div class="cols" style="margin-top:44px;">
+      <div>
+        <div class="label" style="margin-bottom:10px;">Seitenstruktur</div>
+        <ul class="sitemap">
+          <li><b>Start</b><span class="lvl2">Hero → 3 Leistungen → Kennzahlen → Ablauf → Stimmen → Über Moewes → Kontakt-CTA</span></li>
+          <li><b>Leistungen</b><span class="lvl2">Beratung · Planung · Kalkulation</span></li>
+          <li><b>Über uns</b><span class="lvl2">Gesicht &amp; Qualifikation</span></li>
+          <li><b>Projekte</b><span class="lvl2">Galerie echter Bauvorhaben</span></li>
+          <li><b>Kundenstimmen</b> · <b>Kontakt</b></li>
+          <li><b>Impressum</b> · <b>Datenschutz</b></li>
+        </ul>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px;">Wording-Leitplanken</div>
+        <ul>
+          <li>Beruhigend &amp; partnerschaftlich, <b>Nutzen zuerst</b> – „Sicher bauen ohne Kostenfalle".</li>
+          <li>Kennzahlen &amp; <b>„100 % Kostensicherheit"</b> als wiederkehrende Vertrauensanker.</li>
+          <li>Ein klarer, wiederkehrender CTA: <b>kostenloses Erstgespräch</b>.</li>
+        </ul>
+        <div style="margin-top:18px;">
+          <span class="tag">unabhängig</span><span class="tag">Kostensicherheit</span><span class="tag">an die Hand nehmen</span><span class="tag">regional NRW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="label"><span class="num" style="color:var(--accent)">07</span> Kontakt</span>
+    <h2>MOEWES – Projektierung und Vertrieb</h2>
+    <dl class="contact">
+      <div><dt>Adresse</dt><dd>Bachstraße 109<br>50171 Kerpen</dd></div>
+      <div><dt>E-Mail</dt><dd><a href="mailto:kontakt@durchgeplant.de">kontakt@durchgeplant.de</a></dd></div>
+      <div><dt>Telefon</dt><dd>0 22 37 – 9 23 23 40<br><span style="color:var(--band-muted)">Fax – 44</span></dd></div>
+      <div><dt>Persönliche Beratung</dt><dd>0 15 20 – 1 56 00 06</dd></div>
+    </dl>
+    <p class="foot-note">Alle Fakten stammen 1:1 von durchgeplant.de (Start &amp; Unterseite „bauen-mit-moewes"). Farb-, Font- und Layout-Vorschläge sind Empfehlungen als Grundlage für das finale Design.</p>
+  </div>
+</footer>
