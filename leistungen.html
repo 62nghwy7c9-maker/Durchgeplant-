@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>durchgeplant · Unabhängige Bauberatung in NRW – MOEWES</title>
-  <meta name="description" content="Unabhängige Bauberatung und Hausanbieter-Vergleich in NRW. Sicher bauen ohne Kostenfalle – 100 % Kostensicherheit im Werkvertrag.">
+  <title>Leistungen · Beratung, Planung, Kalkulation – durchgeplant</title>
+  <meta name="description" content="Beratung, Planung und Kalkulation für Ihren Hausbau in NRW – unabhängig und mit 100 % Kostensicherheit im Werkvertrag.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E2A3A'/%3E%3Cpath d='M8 22V10l8 5 8-5v12' stroke='%23C4703A' stroke-width='2.4' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.className += ' js';</script>
@@ -18,7 +18,7 @@
       <a href="index.html" class="brand" aria-label="durchgeplant Startseite">durch<b>geplant</b></a>
       <nav aria-label="Hauptnavigation">
         <ul class="nav-links" id="navLinks">
-          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="leistungen.html" class="active" aria-current="page">Leistungen</a></li>
           <li><a href="ablauf.html">Ablauf</a></li>
           <li><a href="projekte.html">Projekte</a></li>
           <li><a href="kundenstimmen.html">Kundenstimmen</a></li>
@@ -34,54 +34,48 @@
   </header>
 
   <main>
-    <section class="hero" style="border-bottom:1px solid var(--line)">
+    <section class="page-hero">
       <div class="hero-grid-bg" aria-hidden="true"></div>
       <div class="container">
-        <span class="eyebrow reveal">MOEWES · Projektierung und Vertrieb · NRW</span>
-        <h1 class="reveal">Sicher bauen –<br><span class="accent">ohne Kostenfalle.</span></h1>
-        <p class="sub reveal">Unabhängige Bauberatung und Hausanbieter-Vergleich. Wir nehmen Sie an die Hand – von der ersten Idee bis zur vertragsreifen Planung. Guter Rat ist selten teuer.</p>
-        <div class="actions reveal">
-          <a href="kontakt.html" class="btn btn-primary btn-lg btn--arrow">Kostenloses Erstgespräch</a>
-          <a href="leistungen.html" class="btn btn-ghost btn-lg">Leistungen ansehen</a>
-        </div>
-        <div class="trust-strip reveal">
-          <div><div class="t-val"><em class="count" data-to="17" data-suffix="+">0</em></div><div class="t-cap">Jahre Erfahrung</div></div>
-          <div><div class="t-val"><em class="count" data-to="320" data-suffix="+">0</em></div><div class="t-cap">Bauprojekte</div></div>
-          <div><div class="t-val"><em class="count" data-to="100" data-suffix="&nbsp;%">0</em></div><div class="t-cap">Kostensicherheit</div></div>
-          <div><div class="t-val"><em class="count" data-to="5" data-suffix="">0</em></div><div class="t-cap">geprüfte Baupartner</div></div>
-        </div>
+        <div class="crumb reveal"><a href="index.html">Start</a> &nbsp;/&nbsp; Leistungen</div>
+        <span class="eyebrow reveal" style="margin-top:18px">Was wir für Sie tun</span>
+        <h1 class="reveal">Beratung, Planung, Kalkulation</h1>
+        <p class="reveal">Drei aufeinander abgestimmte Leistungen – unabhängig, ehrlich und auf Ihr Budget zugeschnitten. So schließen wir die Lücke zwischen Katalog-Fertighaus und teurem Architektenhaus.</p>
       </div>
-      <a href="#leistungen" class="scroll-cue" id="scrollCue" aria-label="Weiter scrollen">
-        Scrollen <span class="cue-track" aria-hidden="true"></span>
-      </a>
     </section>
-
-    <section id="leistungen">
+    <section>
       <div class="container">
-        <div class="sec-head reveal">
-          <span class="eyebrow"><span class="num">01</span> Leistungen</span>
-          <h2>Drei Schritte zu Ihrem Haus</h2>
-          <p>Wir schließen die Lücke zwischen dem Katalog-Fertighaus und dem teuren Architektenhaus – unabhängig, ehrlich und auf Ihr Budget zugeschnitten.</p>
-        </div>
         <div class="cards">
-          <a href="leistungen.html#beratung" class="card reveal">
+          <article class="card reveal" id="beratung">
             <div class="card-n">01 / BERATUNG</div>
             <h3>Beratung</h3>
             <p>Auswahl und Analyse der passenden Hausanbieter – neutral und ganz auf Sie ausgerichtet.</p>
-            <span class="card-more">Mehr erfahren</span>
-          </a>
-          <a href="leistungen.html#planung" class="card reveal">
+            <ul>
+              <li>Unabhängiger Anbieter-Vergleich</li>
+              <li>Ehrliche Einschätzung statt Verkaufsdruck</li>
+              <li>5 geprüfte regionale Baupartner</li>
+            </ul>
+          </article>
+          <article class="card reveal" id="planung">
             <div class="card-n">02 / PLANUNG</div>
             <h3>Planung</h3>
-            <p>Individuelles Hausdesign nach Bedarf, Grundstück und Budget – vom Raumbuch zum Entwurf.</p>
-            <span class="card-more">Mehr erfahren</span>
-          </a>
-          <a href="leistungen.html#kalkulation" class="card reveal">
+            <p>Individuelles Hausdesign nach Bedarf, Grundstück und Budget – vom Raumbuch zum fertigen Entwurf.</p>
+            <ul>
+              <li>Bedarfsanalyse &amp; Raumbuch</li>
+              <li>Grundstücksgerechte Planung</li>
+              <li>Entwurf in ca. 10 Tagen</li>
+            </ul>
+          </article>
+          <article class="card reveal" id="kalkulation">
             <div class="card-n">03 / KALKULATION</div>
             <h3>Kalkulation</h3>
             <p>Vollständige Kostenaufstellung inklusive aller Nebenkosten – volle Transparenz von Anfang an.</p>
-            <span class="card-more">Mehr erfahren</span>
-          </a>
+            <ul>
+              <li>Alle Nebenkosten inklusive</li>
+              <li>100 % Kostensicherheit im Werkvertrag</li>
+              <li>Keine bösen Überraschungen</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -98,31 +92,11 @@
         </div>
       </div>
     </section>
-
-    <section>
-      <div class="container">
-        <div class="sec-head reveal">
-          <span class="eyebrow"><span class="num">02</span> So arbeiten wir</span>
-          <h2>Ein klarer Weg – in acht Schritten</h2>
-          <p>Vom ersten Telefonat bis zur vertragsreifen Planung wissen Sie jederzeit, woran Sie sind.</p>
-        </div>
-        <div class="timeline">
-          <div class="step reveal"><div class="idx">01</div><div><h3>Erster Kontakt</h3><p>Telefonisches Kennenlernen und Klärung Ihres Bedarfs.</p></div></div>
-          <div class="step reveal"><div class="idx">02</div><div><h3>Bedarfsanalyse</h3><p>Ihre Wohnbedürfnisse für die kommenden Lebensphasen.</p></div></div>
-          <div class="step reveal"><div class="idx">03</div><div><h3>Budget-Rahmen</h3><p>Ein realistischer Kostenrahmen – von Anfang an klar.</p></div></div>
-          <div class="step reveal"><div class="idx">…</div><div><h3>… und fünf weitere Schritte</h3><p>Bis zur finalen, vertragsreifen Übergabe.</p></div></div>
-        </div>
-        <div class="reveal" style="margin-top:34px">
-          <a href="ablauf.html" class="btn btn-ghost btn--arrow">Alle 8 Schritte im Detail</a>
-        </div>
-      </div>
-    </section>
-
     <section class="band cta-band">
       <div class="container">
         <span class="eyebrow reveal">Kostenloses Erstgespräch</span>
-        <h2 class="reveal">Bereit, Ihr Bauvorhaben sicher zu planen?</h2>
-        <p class="reveal">Vereinbaren Sie ein kostenloses, unverbindliches Erstgespräch. Wir hören zu und zeigen Ihnen den Weg.</p>
+        <h2 class="reveal">Welche Leistung passt zu Ihrem Vorhaben?</h2>
+        <p class="reveal">Im kostenlosen Erstgespräch finden wir gemeinsam heraus, wie wir Sie am besten unterstützen.</p>
         <div class="actions reveal">
           <a href="kontakt.html" class="btn btn-primary btn-lg btn--arrow">Erstgespräch vereinbaren</a>
         </div>

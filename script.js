@@ -118,25 +118,6 @@
   }, { passive: true });
   onScroll();
 
-  /* ---------- Aktiver Navigationspunkt ---------- */
-  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
-  var sections = navAnchors
-    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-    .filter(Boolean);
-  if (sections.length && hasIO) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var id = entry.target.getAttribute('id');
-          navAnchors.forEach(function (a) {
-            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-          });
-        }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { spy.observe(s); });
-  }
-
   /* ---------- Jahr im Footer ---------- */
   var year = document.getElementById('year');
   if (year) { year.textContent = new Date().getFullYear(); }

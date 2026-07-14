@@ -356,6 +356,27 @@ form { display: grid; gap: 16px; }
 .step .idx { transition: transform .25s var(--ease); display: inline-block; }
 .step:hover .idx { transform: translateX(4px); }
 
+/* ---------- Page-Hero (Unterseiten) ---------- */
+.page-hero { position: relative; overflow: hidden; padding: 112px 0 60px; border-bottom: 1px solid var(--line); }
+.page-hero .container { position: relative; z-index: 1; }
+.page-hero .crumb { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.page-hero .crumb a { color: var(--muted); }
+.page-hero .crumb a:hover { color: var(--accent); }
+.page-hero h1 { font-size: clamp(36px, 6vw, 66px); letter-spacing: -0.03em; max-width: 18ch; margin-top: 18px; }
+.page-hero p { font-size: 19px; color: var(--text); max-width: 58ch; margin-top: 18px; }
+
+/* ---------- Klickbare Karten ---------- */
+a.card { text-decoration: none; }
+.card-more { margin-top: 20px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; color: var(--accent); display: inline-flex; align-items: center; gap: 8px; }
+.card-more::after { content: "→"; transition: transform .25s var(--ease); }
+a.card:hover .card-more::after { transform: translateX(5px); }
+
+/* ---------- CTA-Band ---------- */
+.cta-band { text-align: center; }
+.cta-band h2 { color: var(--band-text); font-size: clamp(28px, 4vw, 42px); max-width: 22ch; margin: 14px auto 0; }
+.cta-band p { color: var(--band-muted); margin: 16px auto 0; max-width: 50ch; }
+.cta-band .actions { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+
 /* ---------- Legal pages ---------- */
 .legal-page { padding: 72px 0 96px; }
 .legal-page .container { max-width: 760px; }
